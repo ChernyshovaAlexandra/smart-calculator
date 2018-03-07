@@ -1,7 +1,6 @@
 class SmartCalculator {
   constructor(initialValue) {
     this.value = initialValue.toString();
-    
   }
 
   add(number) {
@@ -32,7 +31,8 @@ class SmartCalculator {
   calc(number, operator) {
     this.value = this.value + operator + number;
     this.value = eval(this.value);
-    return this.value
+    this.constructor = JSON.stringify(this.value)
+    return this.constructor
   }
 }
 
