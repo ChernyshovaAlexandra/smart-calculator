@@ -1,26 +1,38 @@
 class SmartCalculator {
   constructor(initialValue) {
-    // your implementation
+    this.value = initialValue;
+    this.String = initialValue.toString();
+    this.regExp = /(\d+)(?!.*\d)/;
   }
 
   add(number) {
-    // your implementation
+    this.calc(number, '+')
+    return this;
   }
-  
+
   subtract(number) {
-    // your implementation
+    this.calc(number, '-')
+    return this;
   }
 
   multiply(number) {
-    // your implementation
+    this.calc(number, '*')
+    return this;
   }
 
   devide(number) {
-    // your implementation
+    this.calc(number, '/')
+    return this;
   }
 
   pow(number) {
-    // your implementation
+    this.calc(number, '**')
+    return this;
+  }
+  
+  calc(number, operator) {
+    this.String = this.String + operator + number
+    this.value = eval(this.String)
   }
 }
 
