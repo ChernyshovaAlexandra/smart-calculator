@@ -1,73 +1,51 @@
 class SmartCalculator {
-    constructor(initialValue) {
-        this.string = initialValue.toString();
-    }
+	constructor(initialValue) {
+		this.initialValue = initialValue;
+	}
 
-    finalCount(result){
-        result = new Number(eval(this.string));
-        result.add = (x) => {
-            this.string = this.string + "+" + x ;
-            return eval(this.finalCount(this.string));
-        }
+	add(number) {
+		this.initialValue = new Function("a, b", "return a + '+' + b")(
+			this.initialValue,
+			number
+		);
+		return this;
+	}
 
-        result.subtract = (x) =>{
-            this.string = this.string + "-" + x ;
-            return eval(this.finalCount(this.string));
-        }
+	subtract(number) {
+		this.initialValue = new Function("a, b", "return a + '-' + b")(
+			this.initialValue,
+			number
+		);
+		return this;
+	}
 
-        result.multiply = (x) =>{
-            this.string = this.string + "*" + x ;
-            return eval(this.finalCount(this.string));
-        }
+	multiply(number) {
+		this.initialValue = new Function("a, b", "return a + '*' + b")(
+			this.initialValue,
+			number
+		);
+		return this;
+	}
 
-        result.devide = (x) =>{
-            this.string = this.string + "/" + x ;
-            return eval(this.finalCount(this.string));
-        }
+	devide(number) {
+		this.initialValue = new Function("a, b", "return a + '/' + b")(
+			this.initialValue,
+			number
+		);
+		return this;
+	}
 
-        result.pow = (x) =>{
-            let k = /\D+/g;
-            let dev = this.string.replace(k, " ").trim().split(' ');
-            let base = dev[dev.length - 1];
-            let newString = this.string.slice(0, this.string.lastIndexOf(base));
-            base = Math.pow(base, x);
-            this.string = newString + base;
-            return eval(this.finalCount(this.string));
-        }
-        return result;
-    }
-
-    add(number) {
-        this.string = this.string + "+" + number;
-        return this.finalCount(eval(this.string));
-
-    }
-
-    subtract(number) {
-        this.string = this.string + "-" + number;
-        return this.finalCount(eval(this.string));
-    }
-
-    multiply(number) {
-        this.string = this.string + "*" + number;
-        return this.finalCount(eval(this.string));
-
-    }
-
-    devide(number) {
-        this.string = this.string + "/" + number;
-        return this.finalCount(eval(this.string));
-    }
-
-    pow(number) {
-        this.regExp = /\D+/g;
-        this.dev = this.string.replace(this.regExp, " ").trim().split(' ');
-        this.base = this.dev[this.dev.length - 1];
-        this.newString = this.string.slice(0, this.string.lastIndexOf(this.base));
-        this.base = Math.pow(this.base, number);
-        this.string = this.newString + this.base;
-        return this.finalCount(eval(this.string));
-    }
+	pow(number) {
+		this.initialValue = new Function("a, b", "return a + '**' + b")(
+			this.initialValue,
+			number
+		);
+		return this;
+	}
+	valueOf() {
+		this.initialValue = new Function("a, b", "return " + this.initialValue)();
+		return this.initialValue;
+	}
 }
 
 module.exports = SmartCalculator;
